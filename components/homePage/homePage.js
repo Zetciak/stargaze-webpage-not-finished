@@ -32,7 +32,7 @@ function HomePage() {
 
 				<meta
 					property="og:url"
-					content="https://stargaze.vercel.app/"
+					content="https://zetty-stargaze.vercel.app/"
 				/>
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content="Stargaze - Landing Page" />
@@ -42,14 +42,17 @@ function HomePage() {
 				/>
 				<meta
 					property="og:image"
-					content="https://i.imgur.com/lhMKmBl.png"
+					content="https://i.imgur.com/0NAZ6nF.png"
 				/>
 
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta property="twitter:domain" content="stargaze.vercel.app" />
+				<meta
+					property="twitter:domain"
+					content="zetty-stargaze.vercel.app"
+				/>
 				<meta
 					property="twitter:url"
-					content="https://stargaze.vercel.app/"
+					content="https://zetty-stargaze.vercel.app/"
 				/>
 				<meta name="twitter:title" content="Stargaze - Landing Page" />
 				<meta
@@ -58,7 +61,7 @@ function HomePage() {
 				/>
 				<meta
 					name="twitter:image"
-					content="https://i.imgur.com/lhMKmBl.png"
+					content="https://i.imgur.com/0NAZ6nF.png"
 				/>
 			</Head>
 			<div className={styles.mainDiv}>
