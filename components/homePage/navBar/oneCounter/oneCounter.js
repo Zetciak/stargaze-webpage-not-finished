@@ -1,13 +1,16 @@
 // >> Modules
 import { Typography } from '@mui/material';
+import getVariable from '../../../globalVariables';
 
 // >> Styles
 import useStyles from './oneCounterStyle';
+import useGlobalStyles from '../../../globalStyle';
 
-//Script
+// >> Script
 function OneCounter(props) {
 	// >> Style
 	const styles = useStyles();
+	const globalStyles = useGlobalStyles();
 
 	// >> Render
 	return (
@@ -18,7 +21,7 @@ function OneCounter(props) {
 			<Typography
 				className={styles.counterNumbers}
 				style={
-					props.tabGet === props.tabName
+					props.selectedTab === props.tabName
 						? { background: '#D88977' }
 						: {
 								background: 'rgba(255, 255, 255, 0.1)',

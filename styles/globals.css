@@ -30,3 +30,9 @@ img {
 	-ms-user-select: none;
 	user-select: none;
 }
+
+:root {
+	--toastify-color-success: #1ec46d !important;
+	--toastify-color-error: #e24c4b !important;
+	--toastify-color-info: #70b0fa !important;
+}

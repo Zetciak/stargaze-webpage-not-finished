@@ -1,5 +1,5 @@
 {
-  "name": "stargaze-redesign",
+  "name": "stargaze-webpage",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,23 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.6",
-    "@mui/styles": "^5.8.6",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@mui/styles": "^5.10.3",
     "aos": "^2.3.4",
-    "next": "12.2.0",
+    "axios": "^0.27.2",
+    "next": "12.3.0",
     "react": "18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
-    "react-fast-marquee": "^1.3.2",
+    "react-fast-marquee": "^1.3.5",
     "react-foco": "^1.3.1",
-    "react-hooks-global-state": "^2.0.0-rc.0",
+    "react-hooks-global-state": "^2.0.0",
     "react-scroll": "^1.8.7",
-    "swiper": "^8.2.6"
+    "react-toastify": "^9.0.8"
   },
   "devDependencies": {
-    "eslint": "8.19.0",
-    "eslint-config-next": "12.2.0"
+    "eslint": "8.23.1",
+    "eslint-config-next": "12.3.0"
   }
 }

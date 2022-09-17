@@ -1,18 +1,22 @@
 // >> Modules
-import Image from 'next/image';
-import { Button, Typography } from '@mui/material';
-import { Link } from 'react-scroll';
+import getVariable from '../../globalVariables';
 
 // >> Styles
-import useStyles from './landingStyle.js';
+import useStyles from './landingStyle';
+import useGlobalStyles from '../../globalStyle';
 
-//Script
+// >> Script
 function Landing() {
 	// >> Style
 	const styles = useStyles();
+	const globalStyles = useGlobalStyles();
 
 	// >> Render
-	return <div className={styles.mainDiv}>landing</div>;
+	return (
+		<div className={styles.outsideDiv}>
+			<div className={styles.insideDiv}>Landing page</div>
+		</div>
+	);
 }
 
 export default Landing;

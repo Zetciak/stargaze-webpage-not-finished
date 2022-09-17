@@ -1,12 +1,21 @@
 // >> Modules
+import getVariable from '../../globalVariables';
 import { makeStyles } from '@mui/styles';
 
 // >> Styling
 const useStyles = makeStyles({
-	mainDiv: {
-		width: '1248px',
+	outsideDiv: {
+		width: '100%',
+		position: 'relative',
+		float: 'left',
+		'z-index': '4',
+	},
+
+	insideDiv: {
+		width: '1448px',
 		margin: '0 auto',
 		position: 'relative',
+		marginTop: '0px',
 	},
 });
 

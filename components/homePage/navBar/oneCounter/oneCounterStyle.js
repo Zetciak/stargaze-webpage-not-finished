@@ -1,4 +1,5 @@
-// >> Modulesnb
+// >> Modules
+import getVariable from '../../../globalVariables';
 import { makeStyles } from '@mui/styles';
 
 // >> Styling

@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import '../styles/globals.css';
 import '../styles/general-sans.css';
 
+// >> Script
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {
 		const jssStyles = document.querySelector('#jss-server-side');

@@ -1,10 +1,9 @@
-//Imports
+// >> Imports
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@mui/styles';
-import Script from 'next/script';
 
-//Script
+// >> Script
 export default class MyDocument extends Document {
 	render() {
 		return (

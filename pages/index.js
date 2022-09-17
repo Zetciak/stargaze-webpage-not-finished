@@ -1,163 +1,49 @@
+// >> Modules
+import { useEffect } from 'react';
+import getVariable from '../components/globalVariables';
+import { fetcher } from '../lib/api';
+
 // >> Aos
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from 'react';
-import Image from 'next/image';
 
 // >> Styles
-import useStyles from '../components/globalStyle';
+import useGlobalStyles from '../components/globalStyle';
 
 // >> Pages
-import HomePage from '../components/homePage/homePage.js';
+import HomePage from '../components/homePage/homePage';
 
-// >> Images
-import topLeftColor from '../public/background/topLeftColor.png';
-import sideColor from '../public/background/sideColor.png';
-import firstBgDraw from '../public/background/firstBgDraw.png';
-import restBgDraw from '../public/background/restBgDraw.png';
-
-export default function Home() {
+// >> Script
+export default function Home(props) {
 	// >> Style
-	const styles = useStyles();
+	const styles = useGlobalStyles();
 
-	// >> Aos
+	// >> Functions
 	useEffect(() => {
-		Aos.init({ duration: 700 });
+		Aos.init({ duration: 700, once: true });
 	}, []);
 
 	// >> Render
 	return (
 		<div className={styles.container}>
-			<div className={styles.bgEffects}>
-				<div className={styles.bgColors}>
-					<div className={`${styles.bgColor} ${styles.topLeftColor}`}>
-						<Image
-							src={topLeftColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div
-						className={`${styles.bgColor} ${styles.firstSideColor}`}
-					>
-						<Image
-							src={sideColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div
-						className={`${styles.bgColor} ${styles.secondSideColor} ${styles.rotateSideColor}`}
-					>
-						<Image
-							src={sideColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div
-						className={`${styles.bgColor} ${styles.thirdSideColor}`}
-					>
-						<Image
-							src={sideColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div
-						className={`${styles.bgColor} ${styles.fourthSideColor} ${styles.rotateSideColor}`}
-					>
-						<Image
-							src={sideColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div
-						className={`${styles.bgColor} ${styles.fifthSideColor}`}
-					>
-						<Image
-							src={sideColor}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-				</div>
-				<div className={styles.bgShapes}>
-					<div className={`${styles.bgShape} ${styles.firstBgDraw}`}>
-						<Image
-							src={firstBgDraw}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-					<div className={`${styles.bgShape} ${styles.secondBgDraw}`}>
-						<Image
-							src={restBgDraw}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-
-					<div className={`${styles.bgShape} ${styles.thirdBgDraw}`}>
-						<Image
-							src={restBgDraw}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-
-					<div className={`${styles.bgShape} ${styles.fourthBgDraw}`}>
-						<Image
-							src={restBgDraw}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-
-					<div className={`${styles.bgShape} ${styles.fifthBgDraw}`}>
-						<Image
-							src={restBgDraw}
-							alt=""
-							layout="responsive"
-							objectFit="contain"
-							quality={100}
-							priority={true}
-						/>
-					</div>
-				</div>
-			</div>
-			<HomePage />
+			<HomePage {...props} />
 		</div>
 	);
+}
+
+// >> Script
+export async function getStaticProps() {
+	return {
+		props: {
+			members: await fetcher(
+				`${getVariable['info'].strapiURL}/members?populate=*`
+			),
+			items: await fetcher(
+				`${getVariable['info'].strapiURL}/items?populate=*`
+			),
+			collections: await fetcher(
+				`${getVariable['info'].strapiURL}/collections?populate=*`
+			),
+		},
+	};
 }
