@@ -16,6 +16,7 @@ import restBgDraw from '../../public/background/restBgDraw.png';
 // >> Components
 import Landing from './landing/landing';
 import NavBar from './navBar/navBar';
+import LiveMinting from './liveMinting/liveMinting';
 
 // >> Script
 function HomePage(props) {
@@ -237,7 +238,8 @@ function HomePage(props) {
 				</div>
 				<div className={styles.componentsDiv}>
 					<NavBar {...props} />
-					{/*<Landing />*/}
+					<Landing items={props.items} />
+					<LiveMinting />
 				</div>
 			</div>
 		</>

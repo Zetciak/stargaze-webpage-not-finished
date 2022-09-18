@@ -199,7 +199,7 @@ function NavBar(props) {
 
 	// >> Render
 	return (
-		<div className={styles.outsideDiv}>
+		<nav className={styles.outsideDiv}>
 			<ToastContainer
 				position="bottom-left"
 				autoClose={5000}
@@ -412,7 +412,7 @@ function NavBar(props) {
 					)}
 				</div>
 			</div>
-		</div>
+		</nav>
 	);
 }
 

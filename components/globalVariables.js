@@ -12,10 +12,17 @@ const getVariable = {
 		pageMainColor: '#ffa86f',
 		backgroundColor: '#151517',
 		white: 'rgba(255, 255, 255, 1)',
+		mainGradient:
+			'linear-gradient(90deg, #7150AB -11.39%, #FD9D65 114.72%)',
+		mainGradientHover:
+			'linear-gradient(90deg, #FD9D65 -11.39%, #7150AB 114.72%)',
+		mainGradientRotate:
+			'linear-gradient(0deg, #7150AB -11.39%, #FD9D65 114.72%)',
 	},
 
 	['info']: {
 		strapiURL: 'https://strapi-zetty.herokuapp.com/api',
+		imageURL: 'https://res.cloudinary.com/demo/image/fetch/',
 	},
 };
 

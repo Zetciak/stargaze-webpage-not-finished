@@ -13,9 +13,6 @@ import useGlobalStyles from '../../../globalStyle';
 import verifiedIcon from '../../../../public/images/verified.svg';
 import defaultAvatar from '../../../../public/images/defaultAvatar.png';
 
-// >> Variables
-const imageApi = 'https://res.cloudinary.com/demo/image/fetch/';
-
 // >> Script
 function OneSearchElement(props) {
 	const router = useRouter();
@@ -36,13 +33,15 @@ function OneSearchElement(props) {
 	// Checking variables
 	const checkVariables = () => {
 		if (props.type === 'Item') {
-			setImage(`${imageApi}${props.attributes.image}`);
+			setImage(
+				`${getVariable['info'].imageURL}${props.attributes.image}`
+			);
 			setVerified(props.attributes.collection.data.attributes.verified);
 			setType('Item');
 			setCollectionName(props.attributes.collection.data.attributes.name);
 			setMainName(props.attributes.name);
 		} else if (props.type === 'Collection') {
-			setImage(`${imageApi}${props.attributes.logo}`);
+			setImage(`${getVariable['info'].imageURL}${props.attributes.logo}`);
 			setVerified(props.attributes.verified);
 			setVerifiedUser(props.attributes.author.data.attributes.verified);
 			setMainName(props.attributes.name);
@@ -62,7 +61,7 @@ function OneSearchElement(props) {
 		} else if (props.type === 'User') {
 			if (props.attributes.avatar.data) {
 				setImage(
-					`${imageApi}${props.attributes.avatar.data.attributes.image}`
+					`${getVariable['info'].imageURL}${props.attributes.avatar.data.attributes.image}`
 				);
 			}
 			setVerified(props.attributes.verified);

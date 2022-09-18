@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 		borderBottom: '1px solid rgba(255, 255, 255, 0.25)',
 		position: 'relative',
 		float: 'left',
-		'z-index': '4',
+		'z-index': '5',
 	},
 
 	insideDiv: {
@@ -71,7 +71,7 @@ const useStyles = makeStyles({
 		background: 'rgba(255, 255, 255, 0.07)',
 		borderRadius: '8px',
 		top: '50px',
-		backdropFilter: 'blur(20px)',
+		backdropFilter: 'blur(8px)',
 		padding: '24px 16px',
 		overflow: 'hidden',
 		transition: 'opacity .3s',
@@ -96,7 +96,7 @@ const useStyles = makeStyles({
 		width: '100%',
 		height: '48px',
 		position: 'relative',
-		background: 'linear-gradient(90deg, #7150AB -11.39%, #FD9D65 114.72%)',
+		background: getVariable['colors'].mainGradient,
 		boxShadow: 'none',
 		marginTop: '8px',
 		borderRadius: '8px',
@@ -124,16 +124,14 @@ const useStyles = makeStyles({
 			width: '100%',
 			height: '100%',
 			borderRadius: '8px',
-			background:
-				'linear-gradient(90deg, #FD9D65 -11.39%, #7150AB 114.72%)',
+			background: getVariable['colors'].mainGradientHover,
 			'z-index': '1',
 			opacity: '0',
 			transition: `opacity .5s`,
 		},
 
 		'&:hover': {
-			background:
-				'linear-gradient(90deg, #7150AB -11.39%, #FD9D65 114.72%)',
+			background: getVariable['colors'].mainGradient,
 			boxShadow: 'none',
 
 			'&:before': {
@@ -199,7 +197,7 @@ const useStyles = makeStyles({
 		width: '100%',
 		height: '100px',
 		top: '50px',
-		backdropFilter: 'blur(20px)',
+		backdropFilter: 'blur(8px)',
 	},
 
 	pageSelectorBottomInside: {
@@ -322,7 +320,7 @@ const useStyles = makeStyles({
 		width: '178px',
 		height: '50px',
 		position: 'relative',
-		background: 'linear-gradient(90deg, #7150AB -11.39%, #FD9D65 114.72%)',
+		background: getVariable['colors'].mainGradient,
 		boxShadow: 'none',
 		borderRadius: '8px',
 		marginLeft: '32px',
@@ -351,16 +349,14 @@ const useStyles = makeStyles({
 			width: '100%',
 			height: '100%',
 			borderRadius: '8px',
-			background:
-				'linear-gradient(90deg, #FD9D65 -11.39%, #7150AB 114.72%)',
+			background: getVariable['colors'].mainGradientHover,
 			'z-index': '1',
 			opacity: '0',
 			transition: `opacity .5s`,
 		},
 
 		'&:hover': {
-			background:
-				'linear-gradient(90deg, #7150AB -11.39%, #FD9D65 114.72%)',
+			background: getVariable['colors'].mainGradient,
 			boxShadow: 'none',
 
 			'&:before': {
