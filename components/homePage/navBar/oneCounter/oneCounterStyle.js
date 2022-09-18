@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 	},
 
 	counterNumbers: {
-		fontFamily: 'GeneralSans-Variable',
+		fontFamily: 'General Sans',
 		fontStyle: 'normal',
 		fontWeight: '500',
 		fontSize: '14px',
