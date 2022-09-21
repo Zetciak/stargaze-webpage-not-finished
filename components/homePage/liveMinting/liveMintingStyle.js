@@ -27,6 +27,12 @@ const useStyles = makeStyles({
 		letterSpacing: '-1px',
 		color: 'rgba(255, 255, 255, 0.88)',
 	},
+
+	mintingList: {
+		marginTop: '48px',
+		width: '100%',
+		position: 'relative',
+	},
 });
 
 export default useStyles;

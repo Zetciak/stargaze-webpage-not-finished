@@ -237,9 +237,13 @@ function HomePage(props) {
 					</div>
 				</div>
 				<div className={styles.componentsDiv}>
-					<NavBar {...props} />
+					<NavBar
+						collections={props.collections}
+						members={props.members}
+						items={props.items}
+					/>
 					<Landing items={props.items} />
-					<LiveMinting />
+					<LiveMinting mintings={props.mintings} />
 				</div>
 			</div>
 		</>

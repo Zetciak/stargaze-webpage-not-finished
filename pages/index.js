@@ -36,13 +36,16 @@ export async function getStaticProps() {
 	return {
 		props: {
 			members: await fetcher(
-				`${getVariable['info'].strapiURL}/members?populate=*`
+				`${getVariable['info'].strapiURL}/members?populate=*&pagination[start]=0&pagination[limit]=100`
 			),
 			items: await fetcher(
-				`${getVariable['info'].strapiURL}/items?populate=*`
+				`${getVariable['info'].strapiURL}/items?populate=*&pagination[start]=0&pagination[limit]=100`
 			),
 			collections: await fetcher(
-				`${getVariable['info'].strapiURL}/collections?populate=*`
+				`${getVariable['info'].strapiURL}/collections?populate=*&pagination[start]=0&pagination[limit]=100`
+			),
+			mintings: await fetcher(
+				`${getVariable['info'].strapiURL}/mintings?populate=*&pagination[start]=0&pagination[limit]=100`
 			),
 		},
 	};
