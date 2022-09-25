@@ -1,8 +1,8 @@
 // >> Variables
 const getVariable = {
 	['texts']: {
-		pageTitle: 'Title here',
-		pageDesc: 'Desc here',
+		pageTitle: 'Stargaze',
+		pageDesc: 'The First Interoperable Layer 1 for NFTs.',
 		pageImage: 'https://i.imgur.com/prQR6hi.png',
 		pageTags: 'TAG1,TAG2',
 		pageLink: 'page-name.vercel.app',

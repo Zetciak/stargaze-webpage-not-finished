@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 // >> Styling
 import '../styles/globals.css';
 import '../styles/general-sans.css';
+import '../styles/clash-grotesk.css';
 
 // >> Script
 function MyApp({ Component, pageProps }) {
