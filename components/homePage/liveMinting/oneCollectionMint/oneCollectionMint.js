@@ -20,6 +20,15 @@ import discord from '../../../../public/icons/discord.svg';
 import twitter from '../../../../public/icons/twitter.svg';
 import website from '../../../../public/icons/website.svg';
 
+// >> Variable
+const dateOptions = {
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+	minute: 'numeric',
+	hour: 'numeric',
+};
+
 // >> Script
 function OneCollectionMint(props) {
 	// >> Style
@@ -33,6 +42,10 @@ function OneCollectionMint(props) {
 	const [authorName, setAuthorName] = useState('');
 	const [collectionName, setCollectionName] = useState('');
 	const [collectionDesc, setCollectionDesc] = useState('');
+	const [mintStatus, setMintStatus] = useState('');
+	const [mintPrice, setMintPrice] = useState(0);
+	const [mintStart, setMintStart] = useState('');
+	const [mintEnd, setMintEnd] = useState('');
 	const [collectionSocials, setCollectionSocials] = useState({});
 	const [canRender, setCanRender] = useState(false);
 
@@ -100,13 +113,35 @@ function OneCollectionMint(props) {
 				} else {
 					localSocials.website = false;
 				}
-				console.log(localSocials);
 				setCollectionSocials(localSocials);
+
+				// >> Mint info
+				const nowDate = new Date();
+				if (mintData.whitelist === true) {
+					const wlEnd = new Date(mintData.wlEnd);
+					if (nowDate < wlEnd) {
+						setMintStatus('Whitelist');
+						setMintPrice(mintData.wlPrice + ' $STARS');
+						setMintStart(new Date(mintData.wlStart));
+						setMintEnd(wlEnd);
+					} else {
+						setMintStatus('Public');
+						setMintPrice(mintData.publicPrice + ' $STARS');
+						setMintStart(new Date(mintData.publicStart));
+						setMintEnd(new Date(mintData.publicEnd));
+					}
+				} else {
+					setMintStatus('Public');
+					setMintPrice(mintData.publicPrice + ' $STARS');
+					setMintStart(new Date(mintData.publicStart));
+					setMintEnd(new Date(mintData.publicEnd));
+				}
 
 				// Set can render
 				setCanRender(true);
 
 				// >> Delete it
+				console.log(localSocials);
 				console.log(mintData);
 				console.log(fetchedData.data.attributes.items.data);
 				console.log(fetchedData.data.attributes);
@@ -213,24 +248,30 @@ function OneCollectionMint(props) {
 								color1="#143317"
 								color2="#2F9C3A"
 								leftText="Mint Status:"
-								rightText="Whitelist"
+								rightText={mintStatus}
 							/>
 							<MintingInfoLayer
 								styleType={1}
 								color1="#553933"
 								color2="#D88977"
 								leftText="Price Mint:"
-								rightText="555 $STARS"
+								rightText={mintPrice}
 							/>
 							<MintingInfoLayer
 								styleType={2}
 								leftText="Start Date:"
-								rightText="29 Oct 2022"
+								rightText={mintStart.toLocaleString(
+									'en-GB',
+									dateOptions
+								)}
 							/>
 							<MintingInfoLayer
 								styleType={2}
 								leftText="End Date:"
-								rightText="Unlimited"
+								rightText={mintEnd.toLocaleString(
+									'en-GB',
+									dateOptions
+								)}
 							/>
 							<div
 								className={styles.mintingInfoInsideStripe}

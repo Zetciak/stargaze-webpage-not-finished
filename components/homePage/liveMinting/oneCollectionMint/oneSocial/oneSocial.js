@@ -12,7 +12,7 @@ function OneSocial(props) {
 	// >> Render
 	return (
 		<a
-			href={props.social !== false ? props.social : false}
+			href={props.social !== false ? props.social : ''}
 			target="_blank"
 			rel="noreferrer"
 			className={
@@ -20,6 +20,9 @@ function OneSocial(props) {
 					? `${styles.collectionSocial}`
 					: `${styles.collectionSocial} ${styles.collectionSocialDisabled}`
 			}
+			onClick={(e) => {
+				props.social !== false ? false : e.preventDefault();
+			}}
 		>
 			<Image
 				src={props.image}
