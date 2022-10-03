@@ -1,6 +1,7 @@
 // >> Modules
 import getVariable from '../../globalVariables';
 import { useState, useEffect } from 'react';
+import { getMintings } from '../../../lib/dataFunctions';
 
 // >> Styles
 import useStyles from './liveMintingStyle';
@@ -20,29 +21,10 @@ function LiveMinting(props) {
 
 	// >> useEffect
 	useEffect(() => {
-		let mintingsLocal = [];
-		props.mintings.data.map((element, index) => {
-			if (mintingsLocal.length === 0) {
-				const dateNow = new Date();
-				const wlStart = new Date(element.attributes.wlStart);
-				const publicStart = new Date(element.attributes.publicStart);
-				const publicEnd = new Date(element.attributes.publicEnd);
-				if (element.attributes.whitelist === true) {
-					if (dateNow < publicEnd) {
-						if (dateNow >= wlStart) {
-							mintingsLocal.push(element);
-						}
-					}
-				} else {
-					if (dateNow < publicEnd) {
-						if (dateNow >= publicStart) {
-							mintingsLocal.push(element);
-						}
-					}
-				}
-			}
-		});
-		setMintings(mintingsLocal);
+		async function getMintingsData() {
+			setMintings(await getMintings(props.mintings));
+		}
+		getMintingsData();
 	}, []);
 
 	// >> Render

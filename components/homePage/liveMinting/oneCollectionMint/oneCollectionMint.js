@@ -3,11 +3,15 @@ import { Button, Typography } from '@mui/material';
 import getVariable from '../../../globalVariables';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Marquee from 'react-fast-marquee';
 import { fetcher } from '../../../../lib/api';
+import { useRouter } from 'next/router';
 
 // >> Components
 import OneSocial from './oneSocial/oneSocial';
 import MintingInfoLayer from './mintingInfoLayer/mintingInfoLayer';
+import MintingInfoStripe from './mintingInfoStripe/mintingInfoStripe';
+import OneArtCard from './oneArtCard/oneArtCard';
 
 // >> Styles
 import useStyles from './oneCollectionMintStyle';
@@ -31,6 +35,8 @@ const dateOptions = {
 
 // >> Script
 function OneCollectionMint(props) {
+	const router = useRouter();
+
 	// >> Style
 	const styles = useStyles();
 	const globalStyles = useGlobalStyles();
@@ -38,14 +44,16 @@ function OneCollectionMint(props) {
 	// >> Variables
 	const [mintData, setMintData] = useState(props.attributes);
 	const [collectionInfo, setCollectionInfo] = useState([]);
-	const [collectionItems, setCollectionItems] = useState([]);
+	const [itemsStripes, setItemsStripes] = useState({});
 	const [authorName, setAuthorName] = useState('');
+	const [authorAddress, setAuthorAddress] = useState('');
 	const [collectionName, setCollectionName] = useState('');
 	const [collectionDesc, setCollectionDesc] = useState('');
 	const [mintStatus, setMintStatus] = useState('');
 	const [mintPrice, setMintPrice] = useState(0);
 	const [mintStart, setMintStart] = useState('');
 	const [mintEnd, setMintEnd] = useState('');
+	const [collectionWl, setCollectionWl] = useState(false);
 	const [collectionSocials, setCollectionSocials] = useState({});
 	const [canRender, setCanRender] = useState(false);
 
@@ -56,10 +64,30 @@ function OneCollectionMint(props) {
 				`${getVariable['info'].strapiURL}/collections/${mintData.collection.data.id}?populate=*&pagination[start]=0&pagination[limit]=100`
 			).then((fetchedData) => {
 				// >> Setting data
-				setCollectionItems(fetchedData.data.attributes.items.data);
 				setCollectionInfo(fetchedData.data.attributes);
 
+				// >> Collection items stripe
+				let collectionItems = fetchedData.data.attributes.items.data;
+				let itemsStripesLocal = {};
+
+				for (let ii = 1; ii <= 3; ii++) {
+					itemsStripesLocal[`stripe${ii}`] = [];
+					for (let i = 1; i <= 10; i++) {
+						let randNumber = Math.floor(
+							Math.random() * collectionItems.length
+						);
+
+						itemsStripesLocal[`stripe${ii}`].push(
+							collectionItems[randNumber]
+						);
+					}
+				}
+				setItemsStripes(itemsStripesLocal);
+
 				// >> Author name
+				setAuthorAddress(
+					fetchedData.data.attributes.author.data.attributes.address
+				);
 				if (fetchedData.data.attributes.author.data.attributes.name) {
 					setAuthorName(
 						fetchedData.data.attributes.author.data.attributes.name
@@ -118,6 +146,7 @@ function OneCollectionMint(props) {
 				// >> Mint info
 				const nowDate = new Date();
 				if (mintData.whitelist === true) {
+					setCollectionWl(true);
 					const wlEnd = new Date(mintData.wlEnd);
 					if (nowDate < wlEnd) {
 						setMintStatus('Whitelist');
@@ -139,12 +168,6 @@ function OneCollectionMint(props) {
 
 				// Set can render
 				setCanRender(true);
-
-				// >> Delete it
-				console.log(localSocials);
-				console.log(mintData);
-				console.log(fetchedData.data.attributes.items.data);
-				console.log(fetchedData.data.attributes);
 			});
 		}
 		fetchData();
@@ -160,7 +183,7 @@ function OneCollectionMint(props) {
 							<Image
 								src={`${getVariable['info'].imageURL}${mintData.collection.data.attributes.banner}`}
 								placeholder="blur"
-								blurDataURL={`${getVariable['info'].imageURL}${mintData.collection.data.attributes.banner}`}
+								blurDataURL={`${getVariable['info'].imageURLSmall}${mintData.collection.data.attributes.banner}`}
 								alt=""
 								layout="fill"
 								objectFit="cover"
@@ -174,7 +197,7 @@ function OneCollectionMint(props) {
 									<Image
 										src={`${getVariable['info'].imageURL}${mintData.collection.data.attributes.logo}`}
 										placeholder="blur"
-										blurDataURL={`${getVariable['info'].imageURL}${mintData.collection.data.attributes.logo}`}
+										blurDataURL={`${getVariable['info'].imageURLSmall}${mintData.collection.data.attributes.logo}`}
 										alt=""
 										layout="fill"
 										objectFit="cover"
@@ -212,9 +235,16 @@ function OneCollectionMint(props) {
 								</div>
 								<Typography className={styles.collectionAuthor}>
 									created by:{' '}
-									<span className={styles.authorName}>
+									<a
+										onClick={() => {
+											router.push(
+												`./profile/${authorAddress}`
+											);
+										}}
+										className={styles.authorName}
+									>
 										{authorName}
-									</span>
+									</a>
 								</Typography>
 								<Typography className={styles.collectionDesc}>
 									{collectionDesc}
@@ -276,10 +306,103 @@ function OneCollectionMint(props) {
 							<div
 								className={styles.mintingInfoInsideStripe}
 							></div>
+							{collectionWl === true ? (
+								<MintingInfoStripe
+									styleType="wl"
+									minted={Number(mintData.wlMinted)}
+									maxMint={Number(mintData.wlAddresses)}
+								/>
+							) : (
+								<MintingInfoStripe
+									styleType="noWl"
+									minted={0}
+									maxMint={0}
+								/>
+							)}
+
+							<MintingInfoStripe
+								styleType="global"
+								minted={
+									Number(mintData.wlMinted) +
+									Number(mintData.publicMinted)
+								}
+								maxMint={Number(
+									mintData.collection.data.attributes.supply
+								)}
+							/>
+
+							<Button
+								className={styles.visitMinterBtn}
+								onClick={() => {
+									router.push(
+										`./launchpad/${collectionName}`
+									);
+								}}
+							>
+								<Typography>Visit Minter</Typography>
+							</Button>
 						</div>
 					</div>
 				</div>
-				<div className={styles.collectionArts}></div>
+				<div className={styles.collectionArts}>
+					<div className={styles.oneMarqueeDiv}>
+						<Marquee
+							className={styles.oneMarquee}
+							gradient={false}
+							speed={10}
+							delay={-2}
+						>
+							{itemsStripes['stripe1'].map((element, index) => {
+								return (
+									<OneArtCard
+										key={index}
+										collectionName={collectionName}
+										verified={collectionInfo.verified}
+										art={element.attributes}
+									/>
+								);
+							})}
+						</Marquee>
+					</div>
+					<div className={styles.oneMarqueeDiv}>
+						<Marquee
+							className={styles.oneMarquee}
+							gradient={false}
+							speed={10}
+							delay={-1}
+						>
+							{itemsStripes['stripe2'].map((element, index) => {
+								return (
+									<OneArtCard
+										key={index}
+										collectionName={collectionName}
+										verified={collectionInfo.verified}
+										art={element.attributes}
+									/>
+								);
+							})}
+						</Marquee>
+					</div>
+					<div className={styles.oneMarqueeDiv}>
+						<Marquee
+							className={styles.oneMarquee}
+							gradient={false}
+							speed={10}
+							delay={0}
+						>
+							{itemsStripes['stripe3'].map((element, index) => {
+								return (
+									<OneArtCard
+										key={index}
+										collectionName={collectionName}
+										verified={collectionInfo.verified}
+										art={element.attributes}
+									/>
+								);
+							})}
+						</Marquee>
+					</div>
+				</div>
 			</div>
 		);
 	}

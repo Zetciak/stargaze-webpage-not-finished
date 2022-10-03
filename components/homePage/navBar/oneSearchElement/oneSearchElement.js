@@ -16,12 +16,14 @@ import defaultAvatar from '../../../../public/images/defaultAvatar.png';
 // >> Script
 function OneSearchElement(props) {
 	const router = useRouter();
+
 	// >> Style
 	const styles = useStyles();
 	const globalStyles = useGlobalStyles();
 
 	// >> Variables
 	const [image, setImage] = useState(defaultAvatar.src);
+	const [imageBlur, setImageBlur] = useState(defaultAvatar.src);
 	const [verified, setVerified] = useState(false);
 	const [verifiedUser, setVerifiedUser] = useState(false);
 	const [authorName, setAuthorName] = useState('');
@@ -36,12 +38,18 @@ function OneSearchElement(props) {
 			setImage(
 				`${getVariable['info'].imageURL}${props.attributes.image}`
 			);
+			setImageBlur(
+				`${getVariable['info'].imageURLSmall}${props.attributes.image}`
+			);
 			setVerified(props.attributes.collection.data.attributes.verified);
 			setType('Item');
 			setCollectionName(props.attributes.collection.data.attributes.name);
 			setMainName(props.attributes.name);
 		} else if (props.type === 'Collection') {
 			setImage(`${getVariable['info'].imageURL}${props.attributes.logo}`);
+			setImageBlur(
+				`${getVariable['info'].imageURLSmall}${props.attributes.logo}`
+			);
 			setVerified(props.attributes.verified);
 			setVerifiedUser(props.attributes.author.data.attributes.verified);
 			setMainName(props.attributes.name);
@@ -62,6 +70,9 @@ function OneSearchElement(props) {
 			if (props.attributes.avatar.data) {
 				setImage(
 					`${getVariable['info'].imageURL}${props.attributes.avatar.data.attributes.image}`
+				);
+				setImageBlur(
+					`${getVariable['info'].imageURLSmall}${props.attributes.avatar.data.attributes.image}`
 				);
 			}
 			setVerified(props.attributes.verified);
@@ -92,7 +103,7 @@ function OneSearchElement(props) {
 				<Image
 					src={image}
 					placeholder="blur"
-					blurDataURL={image}
+					blurDataURL={imageBlur}
 					alt=""
 					layout="fill"
 					objectFit="cover"

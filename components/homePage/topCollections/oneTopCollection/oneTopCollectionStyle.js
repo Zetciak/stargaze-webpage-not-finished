@@ -277,7 +277,6 @@ const useStyles = makeStyles({
 		width: '33%',
 		height: '100%',
 		display: 'inline-block',
-		pointerEvents: 'none',
 	},
 
 	oneMarquee: {

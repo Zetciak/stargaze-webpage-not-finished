@@ -23,6 +23,8 @@ const getVariable = {
 	['info']: {
 		strapiURL: 'https://strapi-zetty.herokuapp.com/api',
 		imageURL: 'https://res.cloudinary.com/demo/image/fetch/',
+		imageURLSmall:
+			'https://res.cloudinary.com/demo/image/fetch/w_70,h_70,c_limit/',
 	},
 };
 

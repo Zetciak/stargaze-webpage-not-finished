@@ -88,12 +88,12 @@ function Landing(props) {
 							<Image
 								src={`${getVariable['info'].imageURL}${items[selectedItem].attributes.image}`}
 								placeholder="blur"
-								blurDataURL={`${getVariable['info'].imageURL}${items[selectedItem].attributes.image}`}
+								blurDataURL={`${getVariable['info'].imageURLSmall}${items[selectedItem].attributes.image}`}
 								alt=""
 								layout="fill"
 								objectFit="cover"
 								quality={100}
-								//priority={true}
+								priority={true}
 							/>
 						) : (
 							false

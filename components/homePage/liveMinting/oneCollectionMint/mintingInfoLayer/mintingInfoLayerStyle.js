@@ -6,7 +6,7 @@ const useStyles = makeStyles({
 	mintingInfoLayer: {
 		position: 'relative',
 		width: '100%',
-		height: '27px',
+		height: '28px',
 		marginTop: '8px',
 	},
 

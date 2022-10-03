@@ -17,6 +17,7 @@ import restBgDraw from '../../public/background/restBgDraw.png';
 import Landing from './landing/landing';
 import NavBar from './navBar/navBar';
 import LiveMinting from './liveMinting/liveMinting';
+import TopCollections from './topCollections/topCollections';
 
 // >> Script
 function HomePage(props) {
@@ -244,6 +245,7 @@ function HomePage(props) {
 					/>
 					<Landing items={props.items} />
 					<LiveMinting mintings={props.mintings} />
+					<TopCollections collections={props.collections} />
 				</div>
 			</div>
 		</>
